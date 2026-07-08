@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jay Hughes — Web Design & Development</title>
+<meta name="description" content="Jay Hughes builds custom, hand-coded websites for small businesses, ministries, restaurants, and entrepreneurs. 11 live sites and counting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B0E14'/><text x='50' y='68' font-size='52' font-family='sans-serif' font-weight='bold' text-anchor='middle' fill='%2322D3EE'>JH</text></svg>">
+<style>
+  :root {
+    --bg: #0B0E14;
+    --panel: #121826;
+    --panel-2: #0F1420;
+    --line: #232B3D;
+    --text: #E8ECF4;
+    --muted: #939BB0;
+    --violet: #7C5CFF;
+    --cyan: #22D3EE;
+    --grad: linear-gradient(100deg, var(--violet), var(--cyan));
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .logo, .btn, .chip, .stat b { font-family: 'Space Grotesk', sans-serif; }
+
+  .wrap { width: min(1150px, 92%); margin: 0 auto; }
+  a { color: inherit; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(11, 14, 20, .8); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; }
+  .logo { font-weight: 700; font-size: 1.15rem; text-decoration: none; display: flex; align-items: center; gap: .6rem; }
+  .logo .mark {
+    width: 34px; height: 34px; border-radius: 9px; background: var(--grad);
+    display: grid; place-items: center; color: #0B0E14; font-size: .85rem; font-weight: 700;
+  }
+  .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: .92rem; font-weight: 500; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.cta {
+    color: var(--text); border: 1px solid var(--line); padding: .5rem 1.1rem; border-radius: 999px;
+    transition: border-color .15s ease;
+  }
+  .nav-links a.cta:hover { border-color: var(--cyan); }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; padding: 6.5rem 0 5rem; overflow: hidden; }
+  .hero::before {
+    content: ''; position: absolute; width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 92, 255, .18), transparent 65%);
+    top: -280px; right: -180px; pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(34, 211, 238, .12), transparent 65%);
+    bottom: -220px; left: -120px; pointer-events: none;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .55rem;
+    color: var(--cyan); font-weight: 600; font-size: .85rem; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .eyebrow::before { content: ''; width: 26px; height: 2px; background: var(--grad); }
+  .hero h1 {
+    font-size: clamp(2.4rem, 5.5vw, 4rem); line-height: 1.1; font-weight: 700;
+    max-width: 18ch;
+  }
+  .hero h1 .grad {
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.sub { color: var(--muted); font-size: 1.15rem; max-width: 54ch; margin: 1.4rem 0 2.2rem; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 600; font-size: .98rem;
+    padding: .85rem 1.8rem; border-radius: 999px; transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn.primary { background: var(--grad); color: #0B0E14; }
+  .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(124, 92, 255, .35); }
+  .btn.ghost { border: 1px solid var(--line); color: var(--text); }
+  .btn.ghost:hover { border-color: var(--cyan); }
+
+  .stats { display: flex; gap: 2.8rem; margin-top: 3.5rem; flex-wrap: wrap; }
+  .stat b { display: block; font-size: 2rem; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stat span { color: var(--muted); font-size: .88rem; }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 5rem 0; }
+  .sec-head { margin-bottom: 2.5rem; }
+  .sec-head h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 700; }
+  .sec-head p { color: var(--muted); max-width: 58ch; margin-top: .5rem; }
+
+  /* ---------- FILTERS ---------- */
+  .filters { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 2.2rem; }
+  .chip {
+    background: var(--panel); border: 1px solid var(--line); color: var(--muted);
+    font-size: .85rem; font-weight: 600; padding: .45rem 1.1rem; border-radius: 999px; cursor: pointer;
+    transition: all .15s ease;
+  }
+  .chip:hover { color: var(--text); }
+  .chip.active { background: var(--grad); color: #0B0E14; border-color: transparent; }
+
+  /* ---------- PROJECT GRID ---------- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1.6rem; }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: transform .18s ease, border-color .18s ease;
+  }
+  .card:hover { transform: translateY(-5px); border-color: #3A465F; }
+  .card.hidden { display: none; }
+
+  /* browser chrome */
+  .chrome { background: var(--panel-2); border-bottom: 1px solid var(--line); padding: .55rem .8rem; display: flex; align-items: center; gap: .6rem; }
+  .dots { display: flex; gap: .3rem; }
+  .dots i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+  .dots i:nth-child(1) { background: #FF5F57; } .dots i:nth-child(2) { background: #FEBC2E; } .dots i:nth-child(3) { background: #28C840; }
+  .urlbar {
+    flex: 1; background: var(--bg); border: 1px solid var(--line); border-radius: 6px;
+    color: var(--muted); font-size: .72rem; padding: .2rem .7rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* live preview: real site in a scaled iframe */
+  .preview {
+    position: relative; aspect-ratio: 16 / 10.5; overflow: hidden; background: var(--panel-2);
+    display: block;
+  }
+  .preview iframe {
+    width: 1280px; height: 840px;
+    transform-origin: top left;
+    border: 0; pointer-events: none; background: #fff;
+  }
+  .preview .ph {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    color: var(--muted); font-size: .85rem; font-family: 'Space Grotesk', sans-serif;
+  }
+  .preview::after { content: ''; position: absolute; inset: 0; } /* click shield -> card link handles it */
+
+  .card-body { padding: 1.3rem 1.4rem 1.5rem; display: flex; flex-direction: column; gap: .55rem; flex: 1; }
+  .card-cat { font-size: .72rem; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; color: var(--cyan); }
+  .card-body h3 { font-size: 1.18rem; font-weight: 600; }
+  .card-body p { color: var(--muted); font-size: .92rem; flex: 1; }
+  .card-tags { display: flex; gap: .45rem; flex-wrap: wrap; margin-top: .4rem; }
+  .tag {
+    font-size: .7rem; font-weight: 600; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 999px; padding: .18rem .65rem;
+  }
+  .tag.hot { color: #0B0E14; background: var(--grad); border: 0; }
+  .visit {
+    margin-top: .9rem; text-decoration: none; font-weight: 600; font-size: .9rem;
+    color: var(--cyan); display: inline-flex; align-items: center; gap: .35rem;
+  }
+  .visit:hover { text-decoration: underline; }
+
+  /* ---------- SERVICES ---------- */
+  #services { background: var(--panel-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.4rem; }
+  .svc {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 1.7rem 1.5rem;
+  }
+  .svc .ico {
+    width: 44px; height: 44px; border-radius: 11px; background: var(--grad);
+    display: grid; place-items: center; font-size: 1.25rem; margin-bottom: 1rem;
+  }
+  .svc h3 { font-size: 1.08rem; font-weight: 600; margin-bottom: .4rem; }
+  .svc p { color: var(--muted); font-size: .92rem; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 3rem; align-items: center; }
+  .about-copy p { color: var(--muted); margin-bottom: 1rem; }
+  .about-copy p strong { color: var(--text); }
+  .about-panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 2rem; font-size: .95rem;
+  }
+  .about-panel ul { list-style: none; display: grid; gap: .9rem; }
+  .about-panel li { display: flex; gap: .8rem; align-items: flex-start; color: var(--muted); }
+  .about-panel li b { color: var(--text); font-weight: 600; }
+  .about-panel .dot { color: var(--cyan); }
+
+  /* ---------- CONTACT ---------- */
+  #contact { text-align: center; padding-bottom: 6rem; }
+  #contact h2 { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 700; }
+  #contact h2 .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  #contact p { color: var(--muted); max-width: 46ch; margin: 1rem auto 2.2rem; }
+
+  footer {
+    border-top: 1px solid var(--line); padding: 2rem 0; text-align: center;
+    color: var(--muted); font-size: .85rem;
+  }
+  footer a { color: var(--cyan); text-decoration: none; }
+
+  @media (max-width: 760px) {
+    .nav-links li:not(:last-child) { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .stats { gap: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top"><span class="mark">JH</span>Jay Hughes</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a class="cta" href="#contact">Get in touch</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Web Design &amp; Development · Houston, TX</span>
+    <h1>Custom websites that make small businesses look <span class="grad">big-league.</span></h1>
+    <p class="sub">I design and hand-code fast, modern websites for small businesses, ministries, restaurants, and entrepreneurs — no page builders, no templates, no monthly platform fees.</p>
+    <div class="hero-cta">
+      <a class="btn primary" href="#work">See my work</a>
+      <a class="btn ghost" href="#contact">Start a project</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>11</b><span>live websites</span></div>
+      <div class="stat"><b>5</b><span>industries served</span></div>
+      <div class="stat"><b>100%</b><span>custom-coded</span></div>
+      <div class="stat"><b>$0</b><span>monthly hosting fees</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= WORK ================= -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Selected Work</h2>
+      <p>Every preview below is the <em>live site</em>, not a screenshot. Click through and explore.</p>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="chip active" data-f="all">All</button>
+      <button class="chip" data-f="business">Business &amp; B2B</button>
+      <button class="chip" data-f="food">Food &amp; Events</button>
+      <button class="chip" data-f="ministry">Ministry &amp; Community</button>
+      <button class="chip" data-f="entertainment">Entertainment</button>
+      <button class="chip" data-f="apps">Web Apps</button>
+    </div>
+
+    <div class="grid" id="grid">
+
+      <article class="card" data-cat="business">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="urlbar">hughesstrategic.net</span></div>
+        <a class="preview" href="https://hughesstrategic.net/" target="_blank" rel="noopener" aria-label="Visit Hughes Strategic Group">
+          <span class="ph">Loading preview…</span>
+          <iframe data-src="https://hughesstrategic.net/" title="Hughes Strategic Group preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business &amp; B2B</span>
+          <h3>Hughes Strategic Group</h3>
+          <p>Corporate site for a Houston strategic sourcing &amp; procurement firm — services, capabilities, and lead generation.</p>
+          <div class="card-tags"><span class="tag hot">Custom domain</span><span class="tag">Corporate</span></div>
+          <a class="visit" href="https://hughesstrategic.net/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="business">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="urlbar">jhughes281.github.io/HSG-Lockers</span></div>
+        <a class="preview" href="https://jhughes281.github.io/HSG-Lockers/" target="_blank" rel="noopener" aria-label="Visit HSG Lockers">
+          <span class="ph">Loading preview…</span>
+          <iframe data-src="https://jhughes281.github.io/HSG-Lockers/" title="HSG Lockers preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business &amp; B2B</span>
+          <h3>HSG Smart Lockers</h3>
+          <p>Product marketing site for smart locker systems — tabbed product showcase, spec imagery, and lead capture.</p>
+          <div class="card-tags"><span class="tag">Product marketing</span><span class="tag">Lead gen</span></div>
+          <a class="visit" href="https://jhughes281.github.io/HSG-Lockers/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="business">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="urlbar">jhughes281.github.io/HSG-Entertainment</span></div>
+        <a class="preview" href="https://jhughes281.github.io/HSG-Entertainment/" target="_blank" rel="noopener" aria-label="Visit HSG Entertainment">
+          <span class="ph">Loading preview…</span>
+          <iframe data-src="https://jhughes281.github.io/HSG-Entertainment/" title="HSG Entertainment preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business &amp; B2B</span>
+          <h3>HSG Entertainment</h3>
+          <p>Landing page for fun vending at events and parties — bright, energetic, and built to book.</p>
+          <div class="card-tags"><span class="tag">Landing page</span><span class="tag">Events</span></div>
+          <a class="visit" href="https://jhughes281.github.io/HSG-Entertainment/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="food">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="urlbar">mudbugginseafood.com</span></div>
+        <a class="preview" href="https://mudbugginseafood.com/" target="_blank" rel="noopener" aria-label="Visit Mudbuggin Seafood">
+          <span class="ph">Loading preview…</span>
+          <iframe data-src="https://mudbugginseafood.com/" title="Mudbuggin Seafood preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Food &amp; Events</span>
+          <h3>Mudbuggin Seafood &amp; Shuck &amp; Jive Oysters</h3>
+          <p>Bold brand site for a Houston seafood and oyster operation, served on its own custom domain.</p>
+          <div class="card-tags"><span class="tag hot">Custom domain</span><span class="tag">Restaurant</span></div>
+          <a class="visit" href="https://mudbugginseafood.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="food">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="urlbar">jhughes281.github.io/soca-table-site</span></div>
+        <a class="preview" href="https://jhughes281.github.io/soca-table-site/" target="_blank" rel="noopener" aria-label="Visit Soca Table">
+          <span class="ph">Loading preview…</span>
+          <iframe data-src="https://jhughes281.github.io/soca-table-site/" title="Soca Table preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Food &amp; Events</span>
+          <h3>Soca Table</h3>
+          <p>Caribbean catering &amp; events site with an Antigua-inspired identity — animated island sunrise, layered waves, and custom SVG artwork.</p>
+          <div class="card-tags"><span class="tag">Catering</span><span class="tag">Custom animation</span></div>
+          <a class="visit" href="https://jhughes281.github.io/soca-table-site/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="food">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="urlbar">jhughes281.github.io/italian-ice-site</span></div>
+        <a class="preview" href="https://jhughes281.github.io/italian-ice-site/" target="_blank" rel="noopener" aria-label="Visit Dolce Gelo">
+          <span class="ph">Loading preview…</span>
+          <iframe data-src="https://jhughes281.github.io/italian-ice-site/" title="Dolce Gelo preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Food &amp; Events</span>
+          <h3>Dolce Gelo Italian Ice</h3>
+          <p>Playful storefront concept for an Italian ice shop — hand-drawn SVG illustrations, bouncy animations, flavor menu, and catering.</p>
+          <div class="card-tags"><span class="tag">Concept</span><span class="tag">SVG illustration</span></div>
+          <a class="visit" href="https://jhughes281.github.io/italian-ice-site/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="entertainment">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="urlbar">jhughes281.github.io/dj-mikey-site</span></div>
+        <a class="preview" href="https://jhughes281.github.io/dj-mikey-site/" target="_blank" rel="noopener" aria-label="Visit DJ Mikey">
+          <span class="ph">Loading preview…</span>
+          <iframe data-src="https://jhughes281.github.io/dj-mikey-site/" title="DJ Mikey preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Entertainment</span>
+          <h3>DJ Mikey — Official</h3>
+          <p>Official artist site for a Houston DJ — sharp, bookings-focused, and built to match his sound.</p>
+          <div class="card-tags"><span class="tag">Artist site</span><span class="tag">Bookings</span></div>
+          <a class="visit" href="https://jhughes281.github.io/dj-mikey-site/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="ministry">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="urlbar">jhughes281.github.io/sacred-waters-ministry</span></div>
+        <a class="preview" href="https://jhughes281.github.io/sacred-waters-ministry/" target="_blank" rel="noopener" aria-label="Visit Sacred Waters Ministry">
+          <span class="ph">Loading preview…</span>
+          <iframe data-src="https://jhughes281.github.io/sacred-waters-ministry/" title="Sacred Waters Ministry preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Ministry &amp; Community</span>
+          <h3>Sacred Waters Ministry</h3>
+          <p>Elegant single-page church site — service times, leadership, and contact in a royal purple &amp; gold brand.</p>
+          <div class="card-tags"><span class="tag">Non-profit</span><span class="tag">Brand design</span></div>
+          <a class="visit" href="https://jhughes281.github.io/sacred-waters-ministry/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="ministry">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="urlbar">jhughes281.github.io/sacred-springs-ministry</span></div>
+        <a class="preview" href="https://jhughes281.github.io/sacred-springs-ministry/" target="_blank" rel="noopener" aria-label="Visit Sacred Springs Ministry">
+          <span class="ph">Loading preview…</span>
+          <iframe data-src="https://jhughes281.github.io/sacred-springs-ministry/" title="Sacred Springs Ministry preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Ministry &amp; Community</span>
+          <h3>Sacred Springs Ministry</h3>
+          <p>Sister-ministry site built on a shared design system with its own teal-leaning identity — two brands, one family.</p>
+          <div class="card-tags"><span class="tag">Non-profit</span><span class="tag">Design system</span></div>
+          <a class="visit" href="https://jhughes281.github.io/sacred-springs-ministry/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="ministry">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="urlbar">jhughes281.github.io/bri-temple</span></div>
+        <a class="preview" href="https://jhughes281.github.io/bri-temple/" target="_blank" rel="noopener" aria-label="Visit B-R-I Temple">
+          <span class="ph">Loading preview…</span>
+          <iframe data-src="https://jhughes281.github.io/bri-temple/" title="B-R-I Temple preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Ministry &amp; Community</span>
+          <h3>B-R-I Temple</h3>
+          <p>Ground-up redesign of an existing site-builder page into a fast, custom-coded site in a deep green &amp; gold palette.</p>
+          <div class="card-tags"><span class="tag">Redesign</span><span class="tag">Migration</span></div>
+          <a class="visit" href="https://jhughes281.github.io/bri-temple/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="apps">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="urlbar">jhughes281.github.io/lnuk-org-chart</span></div>
+        <a class="preview" href="https://jhughes281.github.io/lnuk-org-chart/" target="_blank" rel="noopener" aria-label="Visit L'nu'k Org Chart">
+          <span class="ph">Loading preview…</span>
+          <iframe data-src="https://jhughes281.github.io/lnuk-org-chart/" title="Org chart preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Web Apps</span>
+          <h3>Interactive Government Org Chart</h3>
+          <p>14 departments, 45 divisions, and 158 offices turned from a PowerPoint into a searchable, collapsible, print-ready web app.</p>
+          <div class="card-tags"><span class="tag hot">Interactive</span><span class="tag">Data viz</span><span class="tag">Search</span></div>
+          <a class="visit" href="https://jhughes281.github.io/lnuk-org-chart/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>What I Do</h2>
+      <p>From a one-page launch site to interactive tools, everything is built by hand and tuned for speed.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc">
+        <div class="ico">🎨</div>
+        <h3>Custom Website Design</h3>
+        <p>A site designed around your brand — not a template with your logo pasted on. Every color, animation, and illustration is yours.</p>
+      </div>
+      <div class="svc">
+        <div class="ico">⚡</div>
+        <h3>Fast, Free Hosting Setup</h3>
+        <p>Your site deployed with $0/month hosting and free SSL — plus custom domain setup when you're ready to level up.</p>
+      </div>
+      <div class="svc">
+        <div class="ico">🔁</div>
+        <h3>Redesigns &amp; Rescues</h3>
+        <p>Stuck on Wix or an aging site? I rebuild it custom — faster, better looking, and without the monthly platform bill.</p>
+      </div>
+      <div class="svc">
+        <div class="ico">🧩</div>
+        <h3>Interactive Tools</h3>
+        <p>Org charts, menus, calculators, directories — I turn documents and spreadsheets into living web apps people can actually use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-copy">
+      <div class="sec-head" style="margin-bottom:1.2rem;"><h2>About Me</h2></div>
+      <p>I'm <strong>Jay Hughes</strong>, a web designer and developer based in <strong>Houston, Texas</strong>. I work with small businesses, ministries, restaurants, and entrepreneurs who want a website that feels like it cost ten times what it did.</p>
+      <p>My approach is simple: <strong>hand-coded, single-purpose sites</strong> that load fast, look sharp on every phone, and don't lock you into a monthly platform. You own everything — the code, the design, the domain.</p>
+      <p>When your business grows, your site grows with it — custom domains, lead forms, analytics, whatever the next step needs.</p>
+    </div>
+    <div class="about-panel">
+      <ul>
+        <li><span class="dot">◆</span><span><b>Based in:</b> Houston, TX (working with clients anywhere)</span></li>
+        <li><span class="dot">◆</span><span><b>Specialties:</b> brand-first design, custom SVG artwork, interactive data tools</span></li>
+        <li><span class="dot">◆</span><span><b>Stack:</b> hand-written HTML/CSS/JS — no builders, no bloat</span></li>
+        <li><span class="dot">◆</span><span><b>Typical launch:</b> days, not months</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <h2>Have a project in mind?<br><span class="grad">Let's build it.</span></h2>
+    <p>Tell me about your business and what you need — I'll reply with ideas, a plan, and a straight answer on cost.</p>
+    <a class="btn primary" href="mailto:jhughes281@gmail.com?subject=Website%20Project%20Inquiry">📬 &nbsp;Email me — jhughes281@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © 2026 Jay Hughes · Houston, TX · <a href="https://github.com/jhughes281" target="_blank" rel="noopener">github.com/jhughes281</a>
+  </div>
+</footer>
+
+<script>
+  // Scale each preview so the iframe simulates a 1280px-wide desktop viewport
+  function fitPreviews() {
+    document.querySelectorAll('.preview iframe').forEach(f => {
+      const s = f.parentElement.clientWidth / 1280;
+      f.style.transform = `scale(${s})`;
+      f.style.height = (f.parentElement.clientHeight / s) + 'px';
+    });
+  }
+  window.addEventListener('resize', fitPreviews);
+
+  // Lazy-load live previews only when they scroll into view
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const f = e.target.querySelector('iframe[data-src]');
+        if (f) { f.src = f.dataset.src; f.removeAttribute('data-src'); }
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '300px' });
+  document.querySelectorAll('.preview').forEach(p => io.observe(p));
+  fitPreviews();
+
+  // Category filters
+  const chips = document.querySelectorAll('#filters .chip');
+  const cards = document.querySelectorAll('#grid .card');
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const f = chip.dataset.f;
+    cards.forEach(card => {
+      card.classList.toggle('hidden', f !== 'all' && card.dataset.cat !== f);
+    });
+  }));
+</script>
+
+</body>
+</html>
